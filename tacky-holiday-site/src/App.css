@@ -3,6 +3,7 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+
 }
 
 .logo {
@@ -18,6 +19,23 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+.train {
+  position: fixed;
+  bottom: 0;
+  left: -200px; /* Start off-screen to the left */
+  width: 200px;
+  z-index: 1000;
+  animation: move-gif 10s linear infinite;
+}
+
+@keyframes move-gif {
+  0% {
+    left: -200px; /* Start off-screen to the left */
+  }
+  100% {
+    left: 100%; /* Move to off-screen to the right */
+  }
+}
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
