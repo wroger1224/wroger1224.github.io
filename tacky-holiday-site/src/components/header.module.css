@@ -4,12 +4,12 @@
   justify-content:space-between;
   gap:12px;
   padding:12px 20px;
-  background: linear-gradient(90deg,#fff3f9, #fffbe6);
+  background: linear-gradient(90deg,#c2fdf5, #fffbe6);
   border-bottom: 3px solid rgba(0,0,0,0.06);
 }
 .headerLights{font-size:1.2rem}
 .headerContent{flex:1;text-align:left}
-.headerTitle{margin:0;font-size:1.6rem;color:#ff2d95}
+.headerTitle{margin:0;font-size:1.6rem;color:#1e3b0b}
 .headerSubtitle{margin:0;color:#333;opacity:.85}
 .headerActions{display:flex;gap:8px}
-.headerAction{padding:8px 12px;border-radius:8px;background:var(--accent1,#ff0099);color:white;border:none;cursor:pointer}
+.headerAction{padding:8px 12px;border-radius:8px;background:var(--accent1,#1e3b0b);color:white;border:none;cursor:pointer}

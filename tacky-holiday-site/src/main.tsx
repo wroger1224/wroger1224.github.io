@@ -8,7 +8,7 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Header
       title="Tacky Holiday"
-      subtitle="All the glitter you can handle"
+      subtitle="I was born in 1996 I'm doing my best"
       showLights={true}
       onAction={() => console.log('Clicked')}
       className="some-extra-class"

@@ -1,0 +1,40 @@
+.tacky-container {
+  position: static;
+    width:auto;
+    height: 100vh;
+  overflow: hidden; /* Keeps the snow pile inside the screen */
+}
+
+.shovel-cursor {
+    cursor: url('/shovel.png'), auto; /* Custom shovel cursor */
+}
+
+.content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding-top: 50px;
+  color: white;
+  text-align: center;
+  z-index: 10; /* Ensure content is above the snow pile */
+}
+
+.snow-pile {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  /* This is the magic for a smooth transition */
+  transition: height 5s linear;
+  /* Make the pile visibly white with a subtle gradient and soft top shadow */
+  background: linear-gradient(to top, #ffffff 0%, #f0f6ff 40%);
+  /* For a slightly less tacky (more realistic) look, use a background image with transparency 
+  background-image: url('path/to/your/snow-texture.png'); 
+  background-size: cover; */
+  z-index: 1001; /* Puts the pile above the falling snow canvas and below main content */
+  box-shadow: 0 -12px 24px rgba(0,0,0,0.25);
+  display: block;
+  pointer-events: none;
+  cursor: none!important;
+}
