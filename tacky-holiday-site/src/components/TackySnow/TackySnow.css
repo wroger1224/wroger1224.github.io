@@ -1,6 +1,6 @@
 .tacky-container {
-  position: static;
-    width:auto;
+  position: relative;
+    width:100vw;
     height: 100vh;
   overflow: hidden; /* Keeps the snow pile inside the screen */
 }
@@ -35,6 +35,6 @@
   z-index: 1001; /* Puts the pile above the falling snow canvas and below main content */
   box-shadow: 0 -12px 24px rgba(0,0,0,0.25);
   display: block;
-  pointer-events: none;
-  cursor: none!important;
+  pointer-events: auto;
+  cursor: inherit;
 }

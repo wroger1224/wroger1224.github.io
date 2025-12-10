@@ -24,26 +24,27 @@ export default function TackySnow() {
   }, []);
 
   return (
-    <div className="tacky-container">
-      {/* Background Falling Snow (use react-snowfall for the falling effect) */}
-      <Snowfall
-        snowflakeCount={100}
-        style={{ position: 'fixed', width: '100vw', height: '100vh', zIndex: 0, pointerEvents: 'none' }}
-      />
+    /*<EmojiCursor emoji="shovel">*/
+      <div className="tacky-container">
+        {/* Background Falling Snow (use react-snowfall for the falling effect) */}
+        <Snowfall
+          snowflakeCount={30}
+          style={{ position: 'fixed', width: '100vw', height: '100vh', zIndex: 0, pointerEvents: 'none' }}
+        />
 
-      {/* The Accumulating Snow Pile Div */}
-      <div
-        className="snow-pile"
-        style={{ height: `${snowHeight}vh` }}
-      >
-        {/* Optional: Add some "tacky" text or a simple snow texture background here via CSS */}
-        <EmojiCursor emoji="� shovel" />
-      </div>
+        {/* The Accumulating Snow Pile Div */}
+        <div
+          className="snow-pile"
+          style={{ height: `${snowHeight}vh` }}
+        >
+          {/* Optional: Add some "tacky" text or a simple snow texture background here via CSS */}
+        </div>
 
-      <div className="content">
-        <h1>Welcome to my Tacky Website!</h1>
-        <p>Stay too long and you'll be snowed in!</p>
+        <div className="content">
+          <h1>Welcome to my Tacky Website!</h1>
+          <p>Stay too long and you'll be snowed in!</p>
+        </div>
       </div>
-    </div>
+    /*</EmojiCursor>*/
   );
 }

@@ -1,7 +1,7 @@
 #root {
   max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+
+  padding: 2rem 0;
   text-align: center;
 
 }
@@ -24,7 +24,7 @@
   bottom: 0;
   left: -200px; /* Start off-screen to the left */
   width: 200px;
-  z-index: 1000;
+  z-index: 1005;
   animation: move-gif 10s linear infinite;
 }
 
@@ -32,9 +32,9 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 200px;
-  z-index: 1000;
+  z-index: 900;
   background-image: url('/garland.png');
   background-repeat: repeat-x;
   background-size: auto 100%;
