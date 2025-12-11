@@ -1,6 +1,5 @@
-import { useState } from 'react'
+
 import './App.css'
-import Snowfall from 'react-snowfall'
 import TackySnow from './components/TackySnow/tackySnow'
 
 

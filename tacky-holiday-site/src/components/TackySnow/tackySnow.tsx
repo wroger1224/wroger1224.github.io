@@ -1,7 +1,7 @@
 import Snowfall from "react-snowfall";
 import './TackySnow.css';
 import { useEffect, useState } from "react";
-import {EmojiCursor} from "@cursorify/cursors";
+
 
 export default function TackySnow() {
   const [snowHeight, setSnowHeight] = useState(0); // Height percentage of the snow pile
