@@ -4,7 +4,340 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Providers - Provider Directory</title>
-    <link rel="stylesheet" href="doctors-styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Avenir Next LT Pro", Arial, Helvetica, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-color: #007DAC;
+            min-height: 100vh;
+        }
+
+        .page-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Left Navigation */
+        .left-nav {
+            width: auto;
+            background-color: white;
+            border-radius: 24px;
+            margin: 24px 16px 24px 48px;
+            flex-shrink: 0;
+            align-self: flex-start;
+            padding: 0;
+            font-size: 16px;
+        }
+
+        .nav-items {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 16px 24px;
+            color: #002664;
+            font-weight: 700;
+            border-bottom: 1px solid #e5e7eb;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .nav-link.last {
+            border-bottom: none;
+        }
+
+        .nav-link.active {
+            background-color: #002664;
+            color: white;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 60px;
+            margin-right: 0;
+            padding: 32px;
+            max-width: 874px;
+        }
+
+        /* Header */
+        .header {
+            margin: 0 25px 24px 0;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .title {
+            font-size: 34px;
+            color: #ffffff;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+            margin: 0 0 20px 0;
+        }
+
+        .title-underline {
+            height: 3px;
+            position: absolute;
+            background: #fcd900;
+            width: 100%;
+            left: 0;
+            bottom: -3px;
+            border-radius: 12px;
+        }
+
+        .location-section {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            font-size: 18px;
+        }
+
+        .location-icon {
+            width: 24px;
+            height: 24px;
+        }
+
+        .location-text {
+            font-weight: 600;
+        }
+
+        .change-location {
+            background: none;
+            border: none;
+            color: white;
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: inherit;
+            font-family: inherit;
+            padding: 0;
+        }
+
+        .change-location:hover {
+            text-decoration: none;
+        }
+
+        /* Filters */
+        .filters {
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+            gap: 16px;
+            font-size: 14px;
+        }
+
+        .filter-btn {
+            padding: 6px;
+            border-radius: 4px;
+            border: 1px solid #d1d5db;
+            background-color: white;
+            color: #374151;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .filter-btn:hover {
+            background-color: #f9fafb;
+        }
+
+        .filter-btn.active {
+            background-color: #007DAC;
+            color: white;
+            border-color: #007DAC;
+        }
+
+        /* More Dropdown */
+        .more-dropdown {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .more-btn {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 6px 12px;
+            border-radius: 4px;
+            border: 1px solid #d1d5db;
+            background-color: white;
+            color: #374151;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .more-btn:hover {
+            background-color: #f9fafb;
+        }
+
+        .icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            margin-top: 4px;
+            min-width: 200px;
+            width: auto;
+            background-color: white;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            z-index: 10;
+        }
+
+        .dropdown-menu.open {
+            display: block;
+        }
+
+        .dropdown-item {
+            display: block;
+            width: 100%;
+            padding: 8px 16px;
+            text-align: left;
+            background: none;
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+            color: #374151;
+            font-size: 14px;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f9fafb;
+        }
+
+        .dropdown-item.active {
+            background-color: #f3f4f6;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        /* Doctors Grid */
+        .doctors-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 180px);
+            gap: 30px;
+            grid-auto-rows: 1fr;
+        }
+
+        /* Doctor Card */
+        .doctor-card {
+            background-color: white;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            padding: 16px 15px;
+            transition: box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            max-width: 180px;
+        }
+
+        .doctor-card:hover {
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+
+        /* Doctor Image */
+        .doctor-image-container {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .doctor-image {
+            width: 100%;
+            max-width: 150px;
+            aspect-ratio: 1;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+
+        .doctor-placeholder {
+            width: 80px;
+            height: 80px;
+            border-radius: 4px;
+            background-color: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .doctor-placeholder svg {
+            width: 32px;
+            height: 32px;
+            color: #9ca3af;
+        }
+
+        /* Doctor Info */
+        .doctor-info {
+            text-align: left;
+            flex: 1;
+        }
+
+        .doctor-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 2px;
+        }
+
+        .doctor-specialty {
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-top: 32px;
+        }
+
+        .page-btn {
+            padding: 6px 12px;
+            border-radius: 4px;
+            border: 1px solid #d1d5db;
+            background-color: white;
+            color: #374151;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .page-btn:hover {
+            background-color: #f9fafb;
+        }
+
+        .page-btn.active {
+            background-color: #007DAC;
+            color: white;
+            border-color: #007DAC;
+        }
+
+        .ellipsis {
+            color: #002664;
+        }
+    </style>
 </head>
 <body>
     <div class="page-container">
@@ -78,6 +411,335 @@
         </div>
     </div>
 
-    <script src="doctors-script.js"></script>
+    <script>
+        // Doctor data
+        const doctors = [
+            {
+                id: 1,
+                name: "Kristen D Whitaker, MD",
+                specialty: "Medical Oncology & Hematology and Oncology",
+                image: "https://medstarhealth-delivery.sitecorecontenthub.cloud/api/public/content/WHITAKER_Kristen_600?v=7460fed8",
+            },
+            {
+                id: 2,
+                name: "Ami Chitalia, MD",
+                specialty: "Medical Oncology",
+                image: "https://medstarhealth-delivery.sitecorecontenthub.cloud/api/public/content/CHITALIA_Ami_600?v=34b859a8",
+            },
+            {
+                id: 3,
+                name: "Elizabeth Dominic Barrows, MD",
+                specialty: "Medical Oncology, Hematology & Internal Medicine",
+                image: "https://medstarhealth-delivery.sitecorecontenthub.cloud/api/public/content/BARROWS_Elizabeth_600?v=8f6501d7",
+            },
+            {
+                id: 4,
+                name: "Marc Edward Boisvert, MD",
+                specialty: "Breast Surgery & General Surgery",
+                image: "https://medstarhealth-delivery.sitecorecontenthub.cloud/api/public/content/BOISVERT_Marc_600?v=bda49401",
+            },
+            {
+                id: 5,
+                name: "Patricia Barbara Wehner, MD",
+                specialty: "Breast Surgery",
+                image: "https://medstarhealth-delivery.sitecorecontenthub.cloud/api/public/content/WEHNER_Patricia_600?v=6e38e381",
+            },
+            {
+                id: 6,
+                name: "Preetha Ali, MD",
+                specialty: "Colon And Rectal Surgery",
+                image: "https://medstarhealth-delivery.sitecorecontenthub.cloud/api/public/content/ALI_Preetha_600?v=d2f6292e",
+            },
+            {
+                id: 7,
+                name: "Brian Lim Bello, MD",
+                specialty: "Colon And Rectal Surgery",
+                image: "https://medstarhealth-delivery.sitecorecontenthub.cloud/api/public/content/BELLO_Brian_600?v=b0fa6167",
+            },
+            {
+                id: 8,
+                name: "Sara E. Berkey, MD",
+                specialty: "Colon And Rectal Surgery",
+                image: "https://medstarhealth-delivery.sitecorecontenthub.cloud/api/public/content/BERKEY_Sara_600?v=d1633553",
+            },
+            {
+                id: 9,
+                name: "Suthee Rapisuwon, MD",
+                specialty: "Hematology, Myeloma & Hematology and Oncology",
+                image: "https://medstarhealth-delivery.sitecorecontenthub.cloud/api/public/content/RAPISUWON_Suthee?v=f19a30fb",
+            },
+            {
+                id: 10,
+                name: "Aarthi Ganesh Shenoy, MD",
+                specialty: "Hematology, Medical Oncology, Internal Medicine & Hematology and Oncology",
+                image: "https://medstarhealth-delivery.sitecorecontenthub.cloud/api/public/content/SHENOY_Aarthi_600?v=3ec32b8c",
+            },
+            {
+                id: 11,
+                name: "Hira Latif, MD",
+                specialty: "Hematology, Internal Medicine, Medical Oncology & Hematology and Oncology",
+                image: "https://medstarhealth-delivery.sitecorecontenthub.cloud/api/public/content/LATIF_Hira_600_2?v=e87f8fbd",
+            },
+            {
+                id: 12,
+                name: "Salem Kim, MD",
+                specialty: "Hematology, Internal Medicine, Medical Oncology & Hematology and Oncology",
+                image: "https://medstarhealth-delivery.sitecorecontenthub.cloud/api/public/content/KIM_Salem_600?v=b8eda1b8",
+            },
+            {
+                id: 13,
+                name: "Hedy P. Smith, MD",
+                specialty: "Hematology, Internal Medicine, Medical Oncology & Hematology and Oncology",
+                image: "https://medstarhealth-delivery.sitecorecontenthub.cloud/api/public/content/SMITH_Hedy_600?v=831502b7",
+            },
+        ];
+
+        // SVG Icons
+        const icons = {
+            user: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>'
+        };
+
+        // State
+        let selectedSpecialty = 'All';
+        let currentPage = 1;
+        const doctorsPerPage = 8;
+
+        // Parse specialties from a string (split by & and comma only)
+        function parseSpecialties(specialtyString) {
+            return specialtyString
+                .split(/[&,]/)
+                .map(s => s.trim())
+                .filter(s => s.length > 0);
+        }
+
+        // Get all unique individual specialties sorted by frequency
+        function getAllSpecialties() {
+            const specialtyCount = new Map();
+            
+            // Count how many doctors have each specialty
+            doctors.forEach(doctor => {
+                const doctorSpecialties = parseSpecialties(doctor.specialty);
+                doctorSpecialties.forEach(spec => {
+                    specialtyCount.set(spec, (specialtyCount.get(spec) || 0) + 1);
+                });
+            });
+            
+            // Sort specialties by frequency (descending), then alphabetically for ties
+            const sortedSpecialties = Array.from(specialtyCount.entries())
+                .sort((a, b) => {
+                    if (b[1] !== a[1]) {
+                        return b[1] - a[1]; // Sort by count descending
+                    }
+                    return a[0].localeCompare(b[0]); // Sort alphabetically for ties
+                })
+                .map(([specialty]) => specialty);
+            
+            return ['All', ...sortedSpecialties];
+        }
+
+        // Filter doctors based on selected specialty
+        function getFilteredDoctors() {
+            if (selectedSpecialty === 'All') {
+                return doctors;
+            }
+            return doctors.filter(doctor => {
+                const doctorSpecialties = parseSpecialties(doctor.specialty);
+                return doctorSpecialties.includes(selectedSpecialty);
+            });
+        }
+
+        // Create a doctor card
+        function createDoctorCard(doctor) {
+            const card = document.createElement('div');
+            card.className = 'doctor-card';
+            
+            // Image or placeholder
+            const imageHTML = doctor.image 
+                ? `<img src="${doctor.image}" alt="${doctor.name}" class="doctor-image">`
+                : `<div class="doctor-placeholder">${icons.user}</div>`;
+            
+            card.innerHTML = `
+                <div class="doctor-image-container">
+                    ${imageHTML}
+                </div>
+                <div class="doctor-info">
+                    <h3 class="doctor-name">${doctor.name}</h3>
+                    <p class="doctor-specialty">${doctor.specialty}</p>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // Render doctors for current page
+        function renderDoctors() {
+            const grid = document.getElementById('doctorsGrid');
+            const filteredDoctors = getFilteredDoctors();
+            
+            // Calculate pagination
+            const totalPages = Math.ceil(filteredDoctors.length / doctorsPerPage);
+            const indexOfLastDoctor = currentPage * doctorsPerPage;
+            const indexOfFirstDoctor = indexOfLastDoctor - doctorsPerPage;
+            const currentDoctors = filteredDoctors.slice(indexOfFirstDoctor, indexOfLastDoctor);
+            
+            // Clear existing content
+            grid.innerHTML = '';
+            
+            // Add each doctor card
+            currentDoctors.forEach(doctor => {
+                const card = createDoctorCard(doctor);
+                grid.appendChild(card);
+            });
+            
+            // Render pagination
+            renderPagination(totalPages);
+        }
+
+        // Generate page numbers to display
+        function getPageNumbers(totalPages) {
+            const pages = [];
+            
+            if (totalPages <= 7) {
+                // Show all pages if 7 or fewer
+                for (let i = 1; i <= totalPages; i++) {
+                    pages.push(i);
+                }
+            } else {
+                // Always show first page
+                pages.push(1);
+                
+                if (currentPage > 3) {
+                    pages.push('...');
+                }
+                
+                // Show current page and neighbors
+                for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) {
+                    pages.push(i);
+                }
+                
+                if (currentPage < totalPages - 2) {
+                    pages.push('...');
+                }
+                
+                // Always show last page
+                pages.push(totalPages);
+            }
+            
+            return pages;
+        }
+
+        // Render pagination
+        function renderPagination(totalPages) {
+            const paginationEl = document.getElementById('pagination');
+            paginationEl.innerHTML = '';
+            
+            if (totalPages <= 1) {
+                return;
+            }
+            
+            const pages = getPageNumbers(totalPages);
+            
+            pages.forEach(page => {
+                if (typeof page === 'string') {
+                    const ellipsis = document.createElement('span');
+                    ellipsis.className = 'ellipsis';
+                    ellipsis.textContent = page;
+                    paginationEl.appendChild(ellipsis);
+                } else {
+                    const button = document.createElement('button');
+                    button.className = 'page-btn';
+                    if (currentPage === page) {
+                        button.classList.add('active');
+                    }
+                    button.textContent = page;
+                    button.addEventListener('click', () => {
+                        currentPage = page;
+                        renderDoctors();
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    });
+                    paginationEl.appendChild(button);
+                }
+            });
+        }
+
+        // Initialize filters
+        function initializeFilters() {
+            const specialties = getAllSpecialties();
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            
+            // Populate dropdown with remaining specialties (after the first 4 including "All")
+            const remainingSpecialties = specialties.slice(4);
+            remainingSpecialties.forEach(specialty => {
+                const button = document.createElement('button');
+                button.className = 'dropdown-item';
+                button.textContent = specialty;
+                button.dataset.specialty = specialty;
+                button.addEventListener('click', () => {
+                    selectedSpecialty = specialty;
+                    currentPage = 1;
+                    updateFilterButtons();
+                    renderDoctors();
+                    closeDropdown();
+                });
+                dropdownMenu.appendChild(button);
+            });
+            
+            // Add click handlers to main filter buttons
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    selectedSpecialty = button.dataset.specialty;
+                    currentPage = 1;
+                    updateFilterButtons();
+                    renderDoctors();
+                });
+            });
+            
+            // More dropdown toggle
+            const moreBtn = document.getElementById('moreBtn');
+            moreBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                dropdownMenu.classList.toggle('open');
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', () => {
+                closeDropdown();
+            });
+        }
+
+        function closeDropdown() {
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            dropdownMenu.classList.remove('open');
+        }
+
+        function updateFilterButtons() {
+            // Update main filter buttons
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(button => {
+                if (button.dataset.specialty === selectedSpecialty) {
+                    button.classList.add('active');
+                } else {
+                    button.classList.remove('active');
+                }
+            });
+            
+            // Update dropdown items
+            const dropdownItems = document.querySelectorAll('.dropdown-item');
+            dropdownItems.forEach(item => {
+                if (item.dataset.specialty === selectedSpecialty) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeFilters();
+            renderDoctors();
+        });
+    </script>
 </body>
 </html>
