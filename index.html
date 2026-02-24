@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Providers - Provider Directory</title>
+    <link rel="stylesheet" href="doctors-styles.css">
+</head>
+<body>
+    <div class="page-container">
+        <!-- Left Navigation -->
+        <nav class="left-nav">
+            <div class="nav-items">
+                <a href="#" class="nav-link">Overview</a>
+                <a href="#" class="nav-link">Types of Cancer We Treat</a>
+                <a href="#" class="nav-link">Why Choose Us?</a>
+                <a href="#" class="nav-link">Services We Offer</a>
+                <a href="#" class="nav-link">Visiting Us</a>
+                <a href="#" class="nav-link active">Our Providers</a>
+                <a href="#" class="nav-link">Support Services</a>
+                <a href="#" class="nav-link">Policies</a>
+                <a href="#" class="nav-link">Accreditation</a>
+                <a href="#" class="nav-link last">Insurance</a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header with Filters -->
+            <div class="header">
+                <div class="header-top">
+                    <h1 class="title">
+                        Our providers
+                        <span class="title-underline"></span>
+                    </h1>
+                    
+                    <div class="location-section">
+                        <svg class="location-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        <span class="location-text">
+                            Location: <span>22101</span>
+                            <button class="change-location">Change location</button>
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="filters">
+                    <button class="filter-btn active" data-specialty="All">All</button>
+                    <button class="filter-btn" data-specialty="Hematology and Oncology">Hematology and Oncology</button>
+                    <button class="filter-btn" data-specialty="Medical Oncology">Medical Oncology</button>
+                    <button class="filter-btn" data-specialty="Colon And Rectal Surgery">Colon And Rectal Surgery</button>
+                    
+                    <div class="more-dropdown">
+                        <button class="more-btn" id="moreBtn">
+                            More
+                            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                        <div class="dropdown-menu" id="dropdownMenu">
+                            <!-- Remaining specialties will be dynamically inserted here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Doctors Grid -->
+            <div class="doctors-grid" id="doctorsGrid">
+                <!-- Doctor cards will be dynamically inserted here by JavaScript -->
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination" id="pagination">
+                <!-- Pagination will be dynamically inserted here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script src="doctors-script.js"></script>
+</body>
+</html>
